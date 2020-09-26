@@ -1,5 +1,6 @@
 import time
-from linked_list import LinkedList
+
+from binary_search_tree import BSTNode
 
 start_time = time.time()
 
@@ -28,21 +29,25 @@ duplicates = []  # Return the list of duplicates in this data structure
 # print (f"runtime of nested loop (O(n^2)): {end_time - start_time} seconds")
 
 ################################################################
-# Using linked lists data structures to reduce time complexity 
+# Using BST data structures to reduce time complexity 
 
 
-duplicates1 = LinkedList()  # Return the list of duplicates in this data structure
+duplicates1 = []  # Return the list of duplicates in this data structure
 
+binary_tree = BSTNode('names')
 start_time1 = time.time()
 
 
-for name_1 in names_1:  # O(n)
-    if name_1 in names_2:
-        duplicates1.add_to_tail(name_1)
+for name_1 in names_1:
+    binary_tree.insert(name_1)
+
+for name_2 in names_2:
+    if binary_tree.contains(name_2):
+        duplicates1.append(name_2)
 
 
 end_time1 = time.time()
-print(f"\n{duplicates1.length} duplicates:\n\n{', '.join(duplicates1.output_list())}\n\n")
+print(f"\n{len(duplicates1)} duplicates:\n\n{', '.join(duplicates1)}\n\n")
 print (f"runtime of for loop with Linked list: {end_time1 - start_time1} seconds")
 
 
@@ -92,16 +97,16 @@ print (f"runtime of for loop with Linked list: {end_time1 - start_time1} seconds
 
 # # most efficient way with Sets Intersection (&)
 
-# start_time5 = time.time()
-# def find_dups(n1, n2):
-#     names_set1 = set(n1)  # O(len(s))
-#     names_set2 = set(n2)  # O(len(s))
+start_time5 = time.time()
+def find_dups(n1, n2):
+    names_set1 = set(n1)  # O(len(s))
+    names_set2 = set(n2)  # O(len(s))
 
-#     if (names_set1 & names_set2): # O(min(len(s1), len(s2)))
-#         return (names_set1 & names_set2) # O(min(len(s1), len(s2)))
+    if (names_set1 & names_set2): # O(min(len(s1), len(s2)))
+        return (names_set1 & names_set2) # O(min(len(s1), len(s2)))
 
-# duplicates5 = find_dups(names_1, names_2)
+duplicates5 = find_dups(names_1, names_2)
 
-# end_time5 = time.time()
-# print(f"\n{len(duplicates5)} duplicates:\n\n{', '.join(duplicates5)}\n\n")
-# print(f"runtime funcion with sets intersection: {end_time5 - start_time5} seconds")
+end_time5 = time.time()
+print(f"\n{len(duplicates5)} duplicates:\n\n{', '.join(duplicates5)}\n\n")
+print(f"runtime funcion with sets intersection: {end_time5 - start_time5} seconds")
